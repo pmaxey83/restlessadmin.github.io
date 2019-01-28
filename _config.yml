@@ -13,13 +13,17 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: accomplishing now
-email: your-email@example.com
+email: pmaxey.email@gmail.com
+name: Paul Maxey
+#timezone: America/Phoenix
 description: >- # this means to ignore newlines until "baseurl:"
-  SysAdmin who drank too much of the Vim kool-aid.  Now he wants to program.
+  SysAdmin who drank too much of the Vim kool-aid.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: pmaxey83
 github_username:  pmaxey83
+linkedin_username: paul-maxey-84bb4732
+
 
 # Build settings
 markdown: kramdown
