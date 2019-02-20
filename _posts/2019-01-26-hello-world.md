@@ -9,7 +9,6 @@ categories: jekyll personal
 #### Let's Keep It Simple
 Utilizing some solid advice, and a lot of Googling.
 
-I've gone ahead and created a Git Hub pages site 
-using Jekyll.
+I've gone ahead and created a website.
 
 -Paul
