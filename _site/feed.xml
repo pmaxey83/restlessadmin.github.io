@@ -5,21 +5,23 @@
     <description>SysAdmin who drank too much of the Vim kool-aid.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 20 Feb 2019 07:46:40 -0700</pubDate>
-    <lastBuildDate>Wed, 20 Feb 2019 07:46:40 -0700</lastBuildDate>
+    <pubDate>Wed, 20 Feb 2019 15:31:17 -0700</pubDate>
+    <lastBuildDate>Wed, 20 Feb 2019 15:31:17 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
         <title>static content says #1</title>
         <description>&lt;p&gt;&lt;img src=&quot;/assets/screenshot-2019-2-19photogallery.png&quot; alt=&quot;photoGallery&quot; title=&quot;Photo Gallery&quot; /&gt;&lt;/p&gt;
-&lt;h5 id=&quot;today-while-taking-colt-steeles-udemy-course-the-wev-developer-bootcamp-i-realized-colts-image-gallery-exercise-would-be-an-ideal-project-to-transate-to-markdown-and-better-yet-allow-me-to-start-a-new-blog-series-static-content-says&quot;&gt;Today while taking Colt Steele’s Udemy course, &lt;a href=&quot;https://www.udemy.com/the-web-developer-bootcamp&quot;&gt;“The Wev Developer Bootcamp”&lt;/a&gt; I realized Colt’s image gallery exercise would be an ideal project to transate to Markdown, and better yet allow me to start a new blog series “static content says”.&lt;/h5&gt;
+&lt;h5 id=&quot;today-while-taking-colt-steeles-udemy-course-the-wev-developer-bootcamp-i-realized-colts-image-gallery-exercise-would-be-an-ideal-project-to-translate-to-markdown-and-better-yet-allow-me-to-start-a-new-blog-series-static-content-says&quot;&gt;&lt;strong&gt;Today while taking Colt Steele’s Udemy course, &lt;a href=&quot;https://www.udemy.com/the-web-developer-bootcamp&quot;&gt;“The Wev Developer Bootcamp”&lt;/a&gt;, I realized Colt’s image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series “static content says”.&lt;/strong&gt;&lt;/h5&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;Below is the code from the exercise:&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;(Note: you can ignore the p styling, just there for consistencies sake.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(Note: you can ignore the p styling, just there for consistency’s sake.)&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;HTML&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;body&amp;gt;                                                                      
+&lt;p&gt;&lt;strong&gt;HTML&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  8 &amp;lt;body&amp;gt;                                                                      
   9 &amp;lt;p&amp;gt;Paul/Maxey&amp;lt;/p&amp;gt;
  10 &amp;lt;img src=&quot;..\Pictures\ep1.jpg&quot;&amp;gt;
  11 &amp;lt;img src=&quot;..\Pictures\ep2.jpg&quot;&amp;gt;
@@ -33,14 +35,14 @@
  19 &amp;lt;/body&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;CSS&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;img {                                                                       
+&lt;p&gt;&lt;strong&gt;CSS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  1 img {                                                                       
   2     width: 30%;
   3     float: left;
   4     margin: 1.66%;
   5 }
 
-  6 p{
+  6 p {
   7     font-family: raleway;
   8     margin-left: 1.66%;
   9     font-size: 23px;
@@ -52,16 +54,17 @@
  15 
  16 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;First I set variables for each image.&lt;/p&gt;
+&lt;p&gt;First I set “variables” for each image.  The square brackets contain the variable name and are followed by image path and alt-text.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
 [image2]: /assets/ep2.jpg &quot;Copyright Paul Maxey 2019&quot;
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Then I set a style block that I would use with each image..&lt;/p&gt;
+&lt;p&gt;Then I set a style block that I will use with each image..&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{:imageGrid:width=&quot;30%&quot;}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;and applied it.&lt;/p&gt;
+&lt;p&gt;and apply it to each variable.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
 {: imageGrid}
 [image2]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
@@ -73,6 +76,8 @@
 ![image2] ![image5] ![image8]
 ![image3] ![image6] ![image9]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
 &lt;p&gt;I gotta say, it’s pretty close.&lt;/p&gt;
 
 &lt;p&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep1.jpg&quot; alt=&quot;image1&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep4.jpg&quot; alt=&quot;image4&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep7.jpg&quot; alt=&quot;image7&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;
@@ -101,9 +106,11 @@
       <item>
         <title>hello world</title>
         <description>&lt;p&gt;&lt;img src=&quot;/assets/jekyll-logo.png&quot; alt=&quot;image1&quot; title=&quot;Jekyll&quot; /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;for-several-months-now-ive-been-wanting-to-create-my-own-website-the-only-problem-it-had-to-follow-a-few-criteria&quot;&gt;&lt;strong&gt;For several months now, I’ve been wanting to create my own website. The only problem? It had to follow a few criteria..&lt;/strong&gt;&lt;/h4&gt;
+&lt;h5 id=&quot;for-several-months-now-ive-been-wanting-to-create-my-own-website-the-only-problem-it-had-to-follow-a-few-criteria&quot;&gt;&lt;strong&gt;For several months now, I’ve been wanting to create my own website. The only problem? It had to follow a few criteria..&lt;/strong&gt;&lt;/h5&gt;
 
-&lt;p&gt;It needed to be:&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;To meet those criteria it needed to be:&lt;/p&gt;
 
 &lt;h6 id=&quot;1-free&quot;&gt;&lt;strong&gt;1. free&lt;/strong&gt;&lt;/h6&gt;
 &lt;ul&gt;
@@ -123,18 +130,26 @@
 &lt;p&gt;On advice from a colleague, I was suggested to try Jekyll.  A type of static web page generator, that would not only allow me to freely blog, but it would also allow supreme customization of the webpage, all without dedicating any resources to a traditional stack.  Best of all I could use Git Hub as both the host and the sites version control.&lt;/p&gt;
 
 &lt;h4 id=&quot;so-what-did-it-take&quot;&gt;So what did it take?&lt;/h4&gt;
-&lt;p&gt;It really only took a &lt;em&gt;good&lt;/em&gt; reading of the &lt;a href=&quot;https://www.udemy.com/the-web-developer-bootcam://pages.github.com/&quot;&gt;Git Hub Pages documentation&lt;/a&gt;, and a little research into &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll.&lt;/a&gt; Beyond the vanilla setup, I grabbed this &lt;a href=&quot;https://github.com/joshgerdes/jekyll-uno&quot;&gt;theme&lt;/a&gt; and away I went.&lt;/p&gt;
+&lt;p&gt;It only took a &lt;em&gt;good&lt;/em&gt; reading of the &lt;a href=&quot;https://www.udemy.com/the-web-developer-bootcam://pages.github.com/&quot;&gt;Git Hub Pages documentation&lt;/a&gt;, and a little research into &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;. Beyond the vanilla setup, I grabbed this &lt;a href=&quot;https://github.com/joshgerdes/jekyll-uno&quot;&gt;theme&lt;/a&gt; and away I went.&lt;/p&gt;
 
 &lt;p&gt;-Paul&lt;/p&gt;
 </description>
         <pubDate>Sat, 26 Jan 2019 15:35:00 -0700</pubDate>
-        <link>http://localhost:4000/jekyll/personal/2019/01/26/hello-world.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/personal/2019/01/26/hello-world.html</guid>
-        
+        <link>http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</guid>
         
         <category>jekyll</category>
         
+        <category>markdown</category>
+        
+        <category>html</category>
+        
+        <category>css</category>
+        
+        
         <category>personal</category>
+        
+        <category>tutorial</category>
         
       </item>
     

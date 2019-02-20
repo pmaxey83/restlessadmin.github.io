@@ -1491,7 +1491,7 @@ hr { border: none; }
 
 .post pre { width: 95%; }
 
-.post hr { display: block; width: 30%; margin: 2em 0; border-top: 1px solid #dddddd; }
+.post hr { display: block; width: 30%; margin: 2em 0; border-top: 1px solid #dddddd; padding-bottom: 1em; }
 
 .error-code { font-size: 6em; }
 

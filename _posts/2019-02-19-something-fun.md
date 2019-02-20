@@ -6,20 +6,22 @@ date:   2019-02-19 16:18:00 -0700
 categories: [personal,tutorial]
 tags: [markdown,html,css]
 
+
 ---
 
 ![photoGallery](/assets/screenshot-2019-2-19photogallery.png "Photo Gallery")
-##### Today while taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](https://www.udemy.com/the-web-developer-bootcamp) I realized Colt's image gallery exercise would be an ideal project to transate to Markdown, and better yet allow me to start a new blog series "static content says".
+##### **Today while taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](https://www.udemy.com/the-web-developer-bootcamp), I realized Colt's image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series "static content says".**
 
+---
 
 Below is the code from the exercise:
 
-_(Note: you can ignore the p styling, just there for consistencies sake.)_
+_(Note: you can ignore the p styling, just there for consistency's sake.)_
 
 
-HTML
+**HTML**
 ```
-<body>                                                                      
+  8 <body>                                                                      
   9 <p>Paul/Maxey</p>
  10 <img src="..\Pictures\ep1.jpg">
  11 <img src="..\Pictures\ep2.jpg">
@@ -34,15 +36,15 @@ HTML
 ```
 
 
-CSS
+**CSS**
 ```
-img {                                                                       
+  1 img {                                                                       
   2     width: 30%;
   3     float: left;
   4     margin: 1.66%;
   5 }
 
-  6 p{
+  6 p {
   7     font-family: raleway;
   8     margin-left: 1.66%;
   9     font-size: 23px;
@@ -54,18 +56,18 @@ img {
  15 
  16 }
 ```
-
-First I set variables for each image.
+<hr>
+First I set "variables" for each image.  The square brackets contain the variable name and are followed by image path and alt-text.
 ```
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 [image2]: /assets/ep2.jpg "Copyright Paul Maxey 2019"
 ...
 ```
-Then I set a style block that I would use with each image..
+Then I set a style block that I will use with each image..
 ```
 {:imageGrid:width="30%"}
 ```
-and applied it.
+and apply it to each variable.
 ```
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
@@ -79,6 +81,7 @@ Finally I laid out each image in a grid like fashion.
 ![image2] ![image5] ![image8]
 ![image3] ![image6] ![image9]
 ```
+<hr>
 I gotta say, it's pretty close.
 
 ![image1] ![image4] ![image7]
