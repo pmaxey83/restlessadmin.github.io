@@ -5,24 +5,53 @@
     <description>SysAdmin who drank too much of the Vim kool-aid.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 28 Jan 2019 06:45:10 -0700</pubDate>
-    <lastBuildDate>Mon, 28 Jan 2019 06:45:10 -0700</lastBuildDate>
+    <pubDate>Tue, 19 Feb 2019 20:34:33 -0700</pubDate>
+    <lastBuildDate>Tue, 19 Feb 2019 20:34:33 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
+        <title>Static Content Says...</title>
+        <description>&lt;p&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep1.jpg&quot; alt=&quot;image1&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep4.jpg&quot; alt=&quot;image4&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep7.jpg&quot; alt=&quot;image7&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep2.jpg&quot; alt=&quot;image2&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep5.jpg&quot; alt=&quot;image5&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep8.jpg&quot; alt=&quot;image8&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep3.jpg&quot; alt=&quot;image3&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep6.jpg&quot; alt=&quot;image6&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep9.jpg&quot; alt=&quot;image9&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;a-thousand-words&quot;&gt;A Thousand Words&lt;/h4&gt;
+
+</description>
+        <pubDate>Tue, 19 Feb 2019 16:18:00 -0700</pubDate>
+        <link>http://localhost:4000/personal/2019/02/19/something-fun.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/2019/02/19/something-fun.html</guid>
+        
+        <category>cats</category>
+        
+        <category>humans</category>
+        
+        
+        <category>personal</category>
+        
+      </item>
+    
+      <item>
         <title>Hello World?!</title>
-        <description>&lt;p&gt;After reading the manual at least 5 times and rebuilding this site at least that many.. I am now able to create my first blog post.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/park.jpg&quot; alt=&quot;image1&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;lets-keep-it-simple&quot;&gt;Let’s Keep It Simple&lt;/h4&gt;
+&lt;p&gt;Utilizing some solid advice, and a lot of Googling.&lt;/p&gt;
+
+&lt;p&gt;I’ve gone ahead and created a Git Hub pages site 
+using Jekyll.&lt;/p&gt;
 
 &lt;p&gt;-Paul&lt;/p&gt;
 </description>
         <pubDate>Sat, 26 Jan 2019 15:35:00 -0700</pubDate>
-        <link>http://localhost:4000/jekyll/update/2019/01/26/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2019/01/26/welcome-to-jekyll.html</guid>
+        <link>http://localhost:4000/jekyll/personal/2019/01/26/hello-world.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/personal/2019/01/26/hello-world.html</guid>
         
         
         <category>jekyll</category>
         
-        <category>update</category>
+        <category>personal</category>
         
       </item>
     
