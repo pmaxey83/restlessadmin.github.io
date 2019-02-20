@@ -8,7 +8,7 @@ categories: jekyll personal
 ---
 
 ![image1](/assets/park.jpg "Copyright Paul Maxey 2019")
-#### For several months now I've been wanting to create my own website, the only problem? It had to follow a few criteria..
+#### For several months now, I've been wanting to create my own website. The only problem? It had to follow a few criteria..
 
 ##### It needed to be:
 
