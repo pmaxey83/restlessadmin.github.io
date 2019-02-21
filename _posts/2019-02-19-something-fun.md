@@ -10,6 +10,8 @@ tags: [markdown,html,css]
 ---
 
 ![photoGallery](/assets/screenshot-2019-2-19photogallery.png "Photo Gallery")
+##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](http    s://www.udemy.com/the-web-developer-bootcamp), I realize    d Colt's image g    allery exercise would be an ideal project to translate to Markdown, and bett    er yet allow me to start a new blog series "static con    tent says".**
+
 ---
 
 Below is the code from the exercise:
@@ -56,30 +58,39 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
 ```
 <hr>
 First I set "variables" for each image.  The square brackets contain the variable name and are followed by image path and alt-text.
+
 ```
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 [image2]: /assets/ep2.jpg "Copyright Paul Maxey 2019"
 ...
+
 ```
 Then I set a style block that I will use with each image..
+
 ```
 {:imageGrid:width="30%"}
+
 ```
 and apply it to each variable.
+
 ```
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
 [image2]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
 ...
+
 ```
 Finally I laid out each image in a grid like fashion.
+
 ```
 ![image1] ![image4] ![image7]
 ![image2] ![image5] ![image8]
 ![image3] ![image6] ![image9]
 ```
+
 <hr>
+
 I gotta say, it's pretty close.
 
 ![image1] ![image4] ![image7]

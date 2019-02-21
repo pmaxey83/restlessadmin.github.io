@@ -5,13 +5,16 @@
     <description>SysAdmin who drank too much of the Vim kool-aid.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 20 Feb 2019 18:25:55 -0700</pubDate>
-    <lastBuildDate>Wed, 20 Feb 2019 18:25:55 -0700</lastBuildDate>
+    <pubDate>Wed, 20 Feb 2019 18:33:02 -0700</pubDate>
+    <lastBuildDate>Wed, 20 Feb 2019 18:33:02 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
         <title>static content says #1</title>
-        <description>&lt;h2&gt;&lt;img src=&quot;/assets/screenshot-2019-2-19photogallery.png&quot; alt=&quot;photoGallery&quot; title=&quot;Photo Gallery&quot; /&gt;&lt;/h2&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/screenshot-2019-2-19photogallery.png&quot; alt=&quot;photoGallery&quot; title=&quot;Photo Gallery&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;while-taking-colt-steeles-udemy-course-the-wev-developer-bootcamp-i-realize----d-colts-image-g----allery-exercise-would-be-an-ideal-project-to-translate-to-markdown-and-bett----er-yet-allow-me-to-start-a-new-blog-series-static-con----tent-says&quot;&gt;&lt;strong&gt;While taking Colt Steele’s Udemy course, &lt;a href=&quot;http    s://www.udemy.com/the-web-developer-bootcamp&quot;&gt;“The Wev Developer Bootcamp”&lt;/a&gt;, I realize    d Colt’s image g    allery exercise would be an ideal project to translate to Markdown, and bett    er yet allow me to start a new blog series “static con    tent says”.&lt;/strong&gt;&lt;/h5&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;Below is the code from the exercise:&lt;/p&gt;
 
@@ -54,25 +57,33 @@
 &lt;hr /&gt;
 
 &lt;p&gt;First I set “variables” for each image.  The square brackets contain the variable name and are followed by image path and alt-text.&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
 [image2]: /assets/ep2.jpg &quot;Copyright Paul Maxey 2019&quot;
 ...
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Then I set a style block that I will use with each image..&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{:imageGrid:width=&quot;30%&quot;}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;and apply it to each variable.&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
 {: imageGrid}
 [image2]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
 {: imageGrid}
 ...
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Finally I laid out each image in a grid like fashion.&lt;/p&gt;
+
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;![image1] ![image4] ![image7]
 ![image2] ![image5] ![image8]
 ![image3] ![image6] ![image9]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;I gotta say, it’s pretty close.&lt;/p&gt;
