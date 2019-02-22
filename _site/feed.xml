@@ -5,14 +5,14 @@
     <description>SysAdmin who drank too much of the Vim kool-aid.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 20 Feb 2019 18:33:02 -0700</pubDate>
-    <lastBuildDate>Wed, 20 Feb 2019 18:33:02 -0700</lastBuildDate>
+    <pubDate>Fri, 22 Feb 2019 06:24:03 -0700</pubDate>
+    <lastBuildDate>Fri, 22 Feb 2019 06:24:03 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
         <title>static content says #1</title>
         <description>&lt;p&gt;&lt;img src=&quot;/assets/screenshot-2019-2-19photogallery.png&quot; alt=&quot;photoGallery&quot; title=&quot;Photo Gallery&quot; /&gt;&lt;/p&gt;
-&lt;h5 id=&quot;while-taking-colt-steeles-udemy-course-the-wev-developer-bootcamp-i-realize----d-colts-image-g----allery-exercise-would-be-an-ideal-project-to-translate-to-markdown-and-bett----er-yet-allow-me-to-start-a-new-blog-series-static-con----tent-says&quot;&gt;&lt;strong&gt;While taking Colt Steele’s Udemy course, &lt;a href=&quot;http    s://www.udemy.com/the-web-developer-bootcamp&quot;&gt;“The Wev Developer Bootcamp”&lt;/a&gt;, I realize    d Colt’s image g    allery exercise would be an ideal project to translate to Markdown, and bett    er yet allow me to start a new blog series “static con    tent says”.&lt;/strong&gt;&lt;/h5&gt;
+&lt;h5 id=&quot;while-taking-colt-steeles-udemy-course-the-wev-developer-bootcamp-i-realized-colts-image-gallery-exercise-would-be-an-ideal-project-to-translate-to-markdown-and-better-yet-allow-me-to-start-a-new-blog-series-static-content-says&quot;&gt;&lt;strong&gt;While taking Colt Steele’s Udemy course, &lt;a href=&quot;http    s://www.udemy.com/the-web-developer-bootcamp&quot;&gt;“The Wev Developer Bootcamp”&lt;/a&gt;, I realized Colt’s image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series “static content says”.&lt;/strong&gt;&lt;/h5&gt;
 
 &lt;hr /&gt;
 
@@ -41,7 +41,6 @@
   3     float: left;
   4     margin: 1.66%;
   5 }
-
   6 p {
   7     font-family: raleway;
   8     margin-left: 1.66%;

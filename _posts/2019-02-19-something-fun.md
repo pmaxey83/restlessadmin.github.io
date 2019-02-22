@@ -10,7 +10,7 @@ tags: [markdown,html,css]
 ---
 
 ![photoGallery](/assets/screenshot-2019-2-19photogallery.png "Photo Gallery")
-##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](http    s://www.udemy.com/the-web-developer-bootcamp), I realize    d Colt's image g    allery exercise would be an ideal project to translate to Markdown, and bett    er yet allow me to start a new blog series "static con    tent says".**
+##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](http    s://www.udemy.com/the-web-developer-bootcamp), I realized Colt's image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series "static content says".**
 
 ---
 
@@ -43,7 +43,6 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
   3     float: left;
   4     margin: 1.66%;
   5 }
-
   6 p {
   7     font-family: raleway;
   8     margin-left: 1.66%;
