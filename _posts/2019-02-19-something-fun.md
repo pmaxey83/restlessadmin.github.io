@@ -10,7 +10,7 @@ tags: [markdown,html,css]
 ---
 
 ![photoGallery](/assets/screenshot-2019-2-19photogallery.png "Photo Gallery")
-##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](http    s://www.udemy.com/the-web-developer-bootcamp), I realized Colt's image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series "static content says".**
+##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](https://www.udemy.com/the-web-developer-bootcamp), I realized Colt's image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series "static content says".**
 
 ---
 
@@ -77,9 +77,8 @@ and apply it to each variable.
 {: imageGrid}
 [image2]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
-...
-
 ```
+
 Finally I laid out each image in a grid like fashion.
 
 ```
