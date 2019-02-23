@@ -13,6 +13,8 @@ tags: [markdown,html,css]
 ##### **While taking Colt Steele's Udemy course, ["The Wev Developer Bootcamp"](https://www.udemy.com/the-web-developer-bootcamp), I realized Colt's image gallery exercise would be an ideal project to translate to Markdown, and better yet allow me to start a new blog series "static content says".**
 
 ---
+The "static content says" series will focus on fun content that can be produced using Markdown on a static webpage.  So let's start this one off right and get right into the code.  
+
 
 Below is the code from the exercise:
 
@@ -21,7 +23,7 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
 
 **HTML**
 ```
-  8 <body>                                                                      
+  8 <body>
   9 <p>Paul/Maxey</p>
  10 <img src="..\Pictures\ep1.jpg">
  11 <img src="..\Pictures\ep2.jpg">
@@ -38,7 +40,7 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
 
 **CSS**
 ```
-  1 img {                                                                       
+  1 img {
   2     width: 30%;
   3     float: left;
   4     margin: 1.66%;
