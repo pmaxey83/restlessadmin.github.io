@@ -46,10 +46,10 @@ var query,
 return(query)
 };
 ```
-The above snippet is a look at how I built my queries for Solr.  This really is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you'd like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the logic for your paging as well.  So intead of reclaring variables, you can just call a function and build out your queries.  I won't go into specifics about what the query string does/is, there is plenty of documentation on the web for that.
+The above snippet is a look at how I built my queries for Solr.  This really is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you'd like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the logic for your paging as well.  So intead of re-declaring variables, you can just call a function and build out your queries.  I won't go into specifics about what the query string does/is, there are plenty of docs on the web regarding that.
 
 **Paging**
-Credit to [kottenator](https://gist.github.com/kottenator) for [this](https://gist.github.com/kottenator/9d936eb3e4e3c3e02598) paging algorithm.
+_Credit to [kottenator](https://gist.github.com/kottenator) for [this](https://gist.github.com/kottenator/9d936eb3e4e3c3e02598) paging algorithm._
 ```
 //creates page numbers/previous/next buttons
 function initPageNumbers(currentPage){ 
