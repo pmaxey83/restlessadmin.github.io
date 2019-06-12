@@ -54,56 +54,61 @@ _Credit to [kottenator](https://gist.github.com/kottenator) for [this](https://g
 ```javascript
 //creates page numbers/previous/next buttons
 function initPageNumbers(currentPage){ 
-//define empty l var
-var l;
-//clear markup if any exists
-$('#pageNums').html('');
-//get request to solr
-$.get(qStr, function(data){  
-    //total number of results returned
-    total_rows = data['response']['numFound'],
-    //total num divided by rows to return
-    last = Math.ceil(total_rows / rows),
-    current = currentPage,
-    delta = 2,
-    left = current - delta,
-    right = current + delta + 1,
-    range = [],
-    rangeWithDots = [];
-    $('#pageNums').append('<li><a id="previous" href="#'+
-        getPaging(current,"backward")+ 
-        '" class="btn btn-default" onclick="getPage('+
-        getPaging(current,"backward")  + '); initPageNumbers(' + getPaging(current,"backward") + ')">'+ 
-        "Previous" + '</a></li>'); 
+    //define empty l var
+    var l;
+    //clear markup if any exists
+    $('#pageNums').html('');
+    //get request to solr
+    $.get(qStr, function(data){  
+        //total number of results returned
+        total_rows = data['response']['numFound'],
+        //total num divided by rows to return
+        last = Math.ceil(total_rows / rows),
+        current = currentPage,
+        delta = 2,
+        left = current - delta,
+        right = current + delta + 1,
+        range = [],
+        rangeWithDots = []; 
+        $('#pageNums').append('<li><a id="previous" href="#'+
+            getPaging(current,"backward")+ 
+            '" class="btn btn-default" onclick="getPage('+
+            getPaging(current - 1,"backward")  + '); initPageNumbers(' + getPaging(current,"backward") + ')">'+ 
+            "Previous" + '</a></li>'); 
 
-    for (i = 1; i <= last; i++) {
-        (i == 1 || i == last || i >= left && i < right ? range.push(i):null)
-    }
-        for (i of range) {
-            if (l) {
-                if (i - 1 === 2){ 
-                } else if (i - l !== 1) {
-                    $('#pageNums').append('<li><a href="#" class="btn btn-default">' + "..." + '</a></li>');
-                    rangeWithDots.push('...')
+        for (i = 1; i <= last; i++) {
+            (i == 1 || i == last || i >= left && i < right ? range.push(i):null) 
+        }
+          
+            for (i of range) {
+                if (l) {
+                    if (i - 1 === 2){ 
+                    } else if (i - l !== 1) {
+                        $('#pageNums').append('<li><a href="#" class="btn btn-default">' + "..." + '</a></li>');
+                        rangeWithDots.push('...')
+                    }
                 }
-            }
-            $('#pageNums').append('<li><a href="#'+ 
-            (i) + '" class="btn btn-default" onclick="getPage('+ 
-            (i - 1) + '); initPageNumbers(' + (i) + ')">'+ 
-            (i) + '</a></li>');
-            rangeWithDots.push(i);
-            l = i;
-            num = rangeWithDots[2]; 
-        } 
-        (current == 1 ?  $('#pageNums').append('<li><a id="next" href="#'+
-        getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
-        1 + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
-        "Next" + '</a></li>'):$('#pageNums').append('<li><a id="next" href="#'+
-        getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
-        getPaging(current,"foreward") + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
-        "Next" + '</a></li>'));
-        check(total_rows);
-});
+                $('#pageNums').append('<li><a href="#'+ 
+                (i) + '" class="btn btn-default" onclick="getPage('+ 
+                (i - 1) + '); initPageNumbers(' + (i) + ')">'+ 
+                (i) + '</a></li>');
+                rangeWithDots.push(i);
+                l = i;
+                num = rangeWithDots[2]; 
+            } 
+            (current == 1 ?  $('#pageNums').append('<li><a id="next" href="#'+
+            getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
+            1 + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
+            "Next" + '</a></li>'):
+
+            $('#pageNums').append(
+                '<li><a id="next" href="#'+
+            getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
+            getPaging(current - 1,"foreward") + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
+            "Next" + '</a></li>'));
+            
+            check(range[range.length - 1],currentPage);
+    });
 }
 ```
 This would be the 2nd main chunk of my code, the paging.  It's kind of chunky, but it gets the job done. The way I went about creating this was finding an algorithm [someone](https://gist.github.com/kottenator) had already created for the paging, figuring out how it worked, and then using that as a _"framework"_ for my function.  From there I was able to create another function to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.

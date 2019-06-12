@@ -22,7 +22,7 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
 
 
 **HTML**
-```
+```html
   8 <body>
   9 <p>Paul/Maxey</p>
  10 <img src="..\Pictures\ep1.jpg">
@@ -39,7 +39,7 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
 
 
 **CSS**
-```
+```css
   1 img {
   2     width: 30%;
   3     float: left;
@@ -74,7 +74,7 @@ Then I set a style block that I will use with each image..
 ```
 and apply it to each variable.
 
-```
+```md
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
 [image2]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
@@ -83,7 +83,7 @@ and apply it to each variable.
 
 Finally I laid out each image in a grid like fashion.
 
-```
+```md
 ![image1] ![image4] ![image7]
 ![image2] ![image5] ![image8]
 ![image3] ![image6] ![image9]
