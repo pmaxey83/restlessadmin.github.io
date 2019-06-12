@@ -49,6 +49,7 @@ return(query)
 The above snippet is a look at how I built my queries for Solr.  This is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you'd like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the page markup.  I won't go into specifics about what the query string does/is, there are plenty of docs on the web regarding that.
 
 **Paging**
+
 _Credit to [kottenator](https://gist.github.com/kottenator) for [this](https://gist.github.com/kottenator/9d936eb3e4e3c3e02598) paging algorithm._
 ```javascript
 //creates page numbers/previous/next buttons
@@ -76,7 +77,7 @@ $.get(qStr, function(data){
         "Previous" + '</a></li>'); 
 
     for (i = 1; i <= last; i++) {
-        (i == 1 || i == last || i >= left && i < right ? range.push(i):null) //if (i == 1 || i == last || i >= left && i < right) {
+        (i == 1 || i == last || i >= left && i < right ? range.push(i):null)
     }
       
         for (i of range) {
@@ -103,7 +104,6 @@ $.get(qStr, function(data){
         getPaging(current,"foreward") + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
         "Next" + '</a></li>'));
         check(total_rows);
-        //$('#queryTime').append('<li><a href="#"' + (i - 1) + ' class="btn btn-default" onclick="getPage(' + right  + ', query); initPageNumbers(' + right + ')">' + "Next" + '</a></li>');
 });
 }
 ```
