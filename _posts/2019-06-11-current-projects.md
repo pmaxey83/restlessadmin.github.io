@@ -79,7 +79,6 @@ $.get(qStr, function(data){
     for (i = 1; i <= last; i++) {
         (i == 1 || i == last || i >= left && i < right ? range.push(i):null)
     }
-      
         for (i of range) {
             if (l) {
                 if (i - 1 === 2){ 
@@ -107,13 +106,13 @@ $.get(qStr, function(data){
 });
 }
 ```
-This would be the 2nd main chunk of my code, the paging.  It's kind of chunky, but it gets the job done. The way I went about creating this was finding an algorithm [https://gist.github.com/kottenator](someone) had already created for the paging, figuring out how it worked, and then using that as a _"framework"_ for my function.  From there I was able to create another function to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.
+This would be the 2nd main chunk of my code, the paging.  It's kind of chunky, but it gets the job done. The way I went about creating this was finding an algorithm [someone](https://gist.github.com/kottenator) had already created for the paging, figuring out how it worked, and then using that as a _"framework"_ for my function.  From there I was able to create another function to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.
 
 
-So... Obviously you'd be better off using a framework like [https://velocity.apache.org/](Velocity) or [http://flask.pocoo.org/](Flask) along with a [https://wiki.apache.org/solr/IntegratingSolr](language specific Solr library), but for this specific application the approach worked great.  
+So... Obviously you'd be better off using a framework like [Velocity](https://velocity.apache.org/) or [Flask](http://flask.pocoo.org/) along with a [language specific Solr library](https://wiki.apache.org/solr/IntegratingSolr), but for this specific application the approach worked great.  
 
 **NOTE:**
 
-The rest of the code is specific to the application so it won't be necessary to present it, but most of it's purpose was to preserve the search input and specify which core to query using [https://www.w3schools.com/js/js_cookies.asp](cookies)(see getQuery(), var core), activate event listeners, and add some flair(think Google) to the page. 
+The rest of the code is specific to the application so it won't be necessary to present it, but most of it's purpose was to preserve the search input and specify which core to query using [cookies](https://www.w3schools.com/js/js_cookies.asp)(see getQuery(), var core), activate event listeners, and add some flair(think Google) to the page. 
 
 -Paul 
