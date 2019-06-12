@@ -14,17 +14,17 @@ tags: [apache,solr,js,css]
 ---
 
 So I've fallen off the radar for a bit, but it's been for good reasons.  I was able to make the transition from Systems Administrator to Programmer!  Goal 1 CHECK!
-But the real question is now..  how do I go further?  Well let's start by talking about some of the technologies I'm currently working with.
+But the real question is now..  how do I go further?  Well, let us start by talking about some of the technologies I'm currently working with.
 
 
 
 ###### **Apache Solr**
-In my first month on the job a challenge was presented to me.  Build a search application to replace a deprecated search app that is holding back a server migraiton. Ok what?  So build a search engine?..  Oh, no problem let me introduce you to my friend Apache Solr and his cousin Apache Nutch.  These two **FREE** and **OPEN-SOURCE** programs became my best friends for two weeks.  In those two weeks I was able to slam a little jQuery together to produce a dynamic search page that utilized multiple solr cores to segregate searches and featured nifty features like hit highlighting, dynamic paging, and lighting fast search speeds.  These are all features Solr provides out of the box, and with a little reading of the documentation it's not too hard to implement.
+In my first month on the job a challenge was presented to me.  Build a search application to replace a deprecated search app that is holding back a server migration.  Oh, no problem.  Let me introduce you to my friend Solr and his cousin Nutch.  These two **FREE** and **OPEN-SOURCE** programs(both carrying the Apache banner) became my best friends for two weeks.  In that time, I was able to slam a little jQuery together to produce a quick little search application, that not only utilized multiple Solr cores for relevant search. But also featured standard search characteristics like hit highlighting, dynamic paging, and lighting fast speeds.  Did I mention, these are all features Solr provides out of the box?  The best part is, with a little reading of the [documentation](https://www.manning.com/books/solr-in-action?a_bid=39472865&a_aid=1) it's not too hard to implement.
 
-I won't be able to dive into all the code, but let's at least look at some key pieces.
+I won't be able to dive into all the code, but let's at least look at some key pieces and then later we'll dive into Nutch.
 
 **Query Building**
-```
+```javascript
 //rebuild query string depending on variables given
 function getQuery(userInput,withHl,start){    
 
@@ -46,11 +46,11 @@ var query,
 return(query)
 };
 ```
-The above snippet is a look at how I built my queries for Solr.  This really is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you'd like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the logic for your paging as well.  So intead of re-declaring variables, you can just call a function and build out your queries.  I won't go into specifics about what the query string does/is, there are plenty of docs on the web regarding that.
+The above snippet is a look at how I built my queries for Solr.  This is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you'd like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the page markup.  I won't go into specifics about what the query string does/is, there are plenty of docs on the web regarding that.
 
 **Paging**
 _Credit to [kottenator](https://gist.github.com/kottenator) for [this](https://gist.github.com/kottenator/9d936eb3e4e3c3e02598) paging algorithm._
-```
+```javascript
 //creates page numbers/previous/next buttons
 function initPageNumbers(currentPage){ 
 //define empty l var
@@ -69,7 +69,6 @@ $.get(qStr, function(data){
     right = current + delta + 1,
     range = [],
     rangeWithDots = [];
-    console.log(current);
     $('#pageNums').append('<li><a id="previous" href="#'+
         getPaging(current,"backward")+ 
         '" class="btn btn-default" onclick="getPage('+
@@ -108,11 +107,13 @@ $.get(qStr, function(data){
 });
 }
 ```
-This would be the 2nd main chunk of my code, the paging.  It's kind of gross and is a little bloated, but it gets the job done. The way I went about creating this was finding an algorithm someone had already created for the paging, figuring out how it worked and then using that as a framework for my function.  From there I was able to create another fucntion to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.
+This would be the 2nd main chunk of my code, the paging.  It's kind of chunky, but it gets the job done. The way I went about creating this was finding an algorithm [https://gist.github.com/kottenator](someone) had already created for the paging, figuring out how it worked, and then using that as a _"framework"_ for my function.  From there I was able to create another function to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.
 
 
-Obviously you'd be better off using a framework like Node.JS or Flask along with a langugae specific Solr library, but for this specific application the approach worked great.  The rest of the code is specific to the application so it won't be necessary to present it, but most of it's purpose was to preserve the search input via a cookie, specify which core to use, activate event listeners, and add some flair to the page.
+So... Obviously you'd be better off using a framework like [https://velocity.apache.org/](Velocity) or [http://flask.pocoo.org/](Flask) along with a [https://wiki.apache.org/solr/IntegratingSolr](language specific Solr library), but for this specific application the approach worked great.  
 
+**NOTE:**
 
+The rest of the code is specific to the application so it won't be necessary to present it, but most of it's purpose was to preserve the search input and specify which core to query using [https://www.w3schools.com/js/js_cookies.asp](cookies)(see getQuery(), var core), activate event listeners, and add some flair(think Google) to the page. 
 
 -Paul 
