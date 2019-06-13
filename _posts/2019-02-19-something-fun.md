@@ -119,3 +119,12 @@ I gotta say, it's pretty close.
 {: imageGrid}
 
 It's nothing exciting, but it's a fun way to incorporate images in your Jekyll post.
+
+<script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous">
+</script>
+<script>
+console.log("worked");
+</script>
