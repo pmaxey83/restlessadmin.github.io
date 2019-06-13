@@ -58,9 +58,9 @@ _(Note: you can ignore the p styling, just there for consistency's sake.)_
  16 }
 ```
 <hr>
-First I set "variables" for each image.  The square brackets contain the variable name and are followed by image path and alt-text.
+First I set reference links for each image.  The square brackets contain the reference link name and are followed by image path and alt-text.
 
-```
+```md
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 [image2]: /assets/ep2.jpg "Copyright Paul Maxey 2019"
 ...
@@ -68,11 +68,11 @@ First I set "variables" for each image.  The square brackets contain the variabl
 ```
 Then I set a style block that I will use with each image..
 
-```
+```md
 {:imageGrid:width="30%"}
 
 ```
-and apply it to each variable.
+and apply it to each reference link.
 
 ```md
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
@@ -81,21 +81,34 @@ and apply it to each variable.
 {: imageGrid}
 ```
 
-Finally I laid out each image in a grid like fashion.
+ and then finally, I referenced the images.
 
 ```md
-![image1] ![image4] ![image7]
-![image2] ![image5] ![image8]
-![image3] ![image6] ![image9]
+![image1]
+![image2]  
+![image3]  
+![image4] 
+![image5]
+![image6]
+![image7]
+![image8]
+![image9]
 ```
 
 <hr>
 
 I gotta say, it's pretty close.
 
-![image1] ![image4] ![image7]
-![image2] ![image5] ![image8]
-![image3] ![image6] ![image9]
+
+<span><a href="#img1" rel="modal:open">![image1]</a></span>
+<span><a href="#img2" rel="modal:open">![image2]</a></span>
+<span><a href="#img3" rel="modal:open">![image3]</a></span>
+<span><a href="#img4" rel="modal:open">![image4]</a></span>
+<span><a href="#img5" rel="modal:open">![image5]</a></span>
+<span><a href="#img6" rel="modal:open">![image6]</a></span>
+<span><a href="#img7" rel="modal:open">![image7]</a></span>
+<span><a href="#img8" rel="modal:open">![image8]</a></span>
+<span><a href="#img9" rel="modal:open">![image9]</a></span>
 
 {:imageGrid:width="30%"}
 
@@ -120,13 +133,55 @@ I gotta say, it's pretty close.
 
 It's nothing exciting, but it's a fun way to incorporate images in your Jekyll post.
 
-<script
+<div id="img1" class="modal" style="text-align: center;">
+  <img src="/assets/ep1.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img2" class="modal" style="text-align: center;">
+  <img src="/assets/ep2.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img3" class="modal" style="text-align: center;">
+  <img src="/assets/ep3.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img4" class="modal" style="text-align: center;">
+  <img src="/assets/ep4.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img5" class="modal" style="text-align: center;">
+  <img src="/assets/ep5.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img6" class="modal" style="text-align: center;">
+  <img src="/assets/ep6.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img7" class="modal" style="text-align: center;">
+  <img src="/assets/ep7.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img8" class="modal" style="text-align: center;">
+  <img src="/assets/ep8.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+<div id="img9" class="modal" style="text-align: center;">
+  <img src="/assets/ep9.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <br>
+  <a href="#" rel="modal:close">Close</a>
+</div>
 
+<script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-			  crossorigin="anonymous">
-</script>
-<script>
+			  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-
-</script>

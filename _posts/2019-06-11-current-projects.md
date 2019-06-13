@@ -70,10 +70,13 @@ function initPageNumbers(currentPage){
         right = current + delta + 1,
         range = [],
         rangeWithDots = []; 
-        $('#pageNums').append('<li><a id="previous" href="#'+
+        $('#pageNums').append(
+            '<li><a id="previous" href="#'+
             getPaging(current,"backward")+ 
             '" class="btn btn-default" onclick="getPage('+
-            getPaging(current - 1,"backward")  + '); initPageNumbers(' + getPaging(current,"backward") + ')">'+ 
+            getPaging(current - 1,"backward")  + 
+            '); initPageNumbers(' + getPaging(current,"backward") + 
+            ')">'+ 
             "Previous" + '</a></li>'); 
 
         for (i = 1; i <= last; i++) {
@@ -84,7 +87,9 @@ function initPageNumbers(currentPage){
                 if (l) {
                     if (i - 1 === 2){ 
                     } else if (i - l !== 1) {
-                        $('#pageNums').append('<li><a href="#" class="btn btn-default">' + "..." + '</a></li>');
+                        $('#pageNums').append(
+                        '<li><a href="#" class="btn btn-default">' + 
+                        "..." + '</a></li>');
                         rangeWithDots.push('...')
                     }
                 }
@@ -96,15 +101,17 @@ function initPageNumbers(currentPage){
                 l = i;
                 num = rangeWithDots[2]; 
             } 
-            (current == 1 ?  $('#pageNums').append('<li><a id="next" href="#'+
-            getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
-            1 + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
+            (current == 1 ?  $('#pageNums').append(
+            '<li><a id="next" href="#'+ getPaging(current,"foreward") +
+            '" class="btn btn-default" onclick="getPage('+ 1 + '); initPageNumbers(' +
+             getPaging(current,"foreward") + ')">'+ 
             "Next" + '</a></li>'):
 
             $('#pageNums').append(
-                '<li><a id="next" href="#'+
-            getPaging(current,"foreward") + '" class="btn btn-default" onclick="getPage('+
-            getPaging(current - 1,"foreward") + '); initPageNumbers(' + getPaging(current,"foreward") + ')">'+ 
+            '<li><a id="next" href="#' + getPaging(current,"foreward") +
+            '" class="btn btn-default" onclick="getPage('+
+            getPaging(current - 1,"foreward") + '); initPageNumbers(' +
+            getPaging(current,"foreward") + ')">'+ 
             "Next" + '</a></li>'));
             
             check(range[range.length - 1],currentPage);

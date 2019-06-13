@@ -2,12 +2,149 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>accomplishing now</title>
-    <description>SysAdmin who drank too much of the Vim kool-aid.</description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 23 Feb 2019 15:30:06 -0700</pubDate>
-    <lastBuildDate>Sat, 23 Feb 2019 15:30:06 -0700</lastBuildDate>
+    <description>Former Sys-Admin who drank too much of the Vim kool-aid.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 13 Jun 2019 11:36:39 -0700</pubDate>
+    <lastBuildDate>Thu, 13 Jun 2019 11:36:39 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
+    
+      <item>
+        <title>current projects</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/assets/solr-logo.png&quot; alt=&quot;image1&quot; title=&quot;Jekyll&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;its-been-awhile-lets-talk&quot;&gt;&lt;strong&gt;it’s been awhile, let’s talk&lt;/strong&gt;&lt;/h5&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So I’ve fallen off the radar for a bit, but it’s been for good reasons.  I was able to make the transition from Systems Administrator to Programmer!  Goal 1 CHECK!
+But the real question is now..  how do I go further?  Well, let us start by talking about some of the technologies I’m currently working with.&lt;/p&gt;
+
+&lt;h6 id=&quot;apache-solr&quot;&gt;&lt;strong&gt;Apache Solr&lt;/strong&gt;&lt;/h6&gt;
+&lt;p&gt;In my first month on the job a challenge was presented to me.  Build a search application to replace a deprecated search app that is holding back a server migration.  Oh, no problem.  Let me introduce you to my friend Solr and his cousin Nutch.  These two &lt;strong&gt;FREE&lt;/strong&gt; and &lt;strong&gt;OPEN-SOURCE&lt;/strong&gt; programs(both carrying the Apache banner) became my best friends for two weeks.  In that time, I was able to slam a little jQuery together to produce a quick little search application, that not only utilized multiple Solr cores for relevant search. But also featured standard search characteristics like hit highlighting, dynamic paging, and lighting fast speeds.  Did I mention, these are all features Solr provides out of the box?  The best part is, with a little reading of the &lt;a href=&quot;https://www.manning.com/books/solr-in-action?a_bid=39472865&amp;amp;a_aid=1&quot;&gt;documentation&lt;/a&gt; it’s not too hard to implement.&lt;/p&gt;
+
+&lt;p&gt;I won’t be able to dive into all the code, but let’s at least look at some key pieces and then later we’ll dive into Nutch.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Query Building&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//rebuild query string depending on variables given&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;withHl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;    
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://$SOLRSERVER:8983/solr/&quot;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;core&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getCookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;searchType&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//core to query  &lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;qt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/select?&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//request handler&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;paging&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'rows='&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;amp;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'start='&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;df=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;content&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//default search field&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;title%2Ccontent%2Curl%2Canchor&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//field list to return(comma separated) (%2C = &quot;,&quot; escape)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;hl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hl=on&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;hlS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hl.snippets=2&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;hlPre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hl.simple.pre=&amp;lt;span class=&quot;highlight&quot;&amp;gt;&amp;amp;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;hlPost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hl.simple.post=&amp;lt;/span&amp;gt;&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;q&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;q=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;~2&amp;amp;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; 
+&lt;span class=&quot;c1&quot;&gt;//build url again, depending on if paging &amp;amp; hit-high lighting are needed&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;withHl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;core&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paging&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;core&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;qt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hlS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hlPre&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hlPost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;paging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The above snippet is a look at how I built my queries for Solr.  This is the key to my app because not only do the queries to Solr provide search results, but they also tell Solr what features you’d like returned with those results.(hit-highlighting, paging, etc).  This is useful to know when building out the page markup.  I won’t go into specifics about what the query string does/is, there are plenty of docs on the web regarding that.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Paging&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Credit to &lt;a href=&quot;https://gist.github.com/kottenator&quot;&gt;kottenator&lt;/a&gt; for &lt;a href=&quot;https://gist.github.com/kottenator/9d936eb3e4e3c3e02598&quot;&gt;this&lt;/a&gt; paging algorithm.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//creates page numbers/previous/next buttons&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;initPageNumbers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;currentPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; 
+    &lt;span class=&quot;c1&quot;&gt;//define empty l var&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//clear markup if any exists&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//get request to solr&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;qStr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+        &lt;span class=&quot;c1&quot;&gt;//total number of results returned&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;total_rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'response'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'numFound'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//total num divided by rows to return&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;total_rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;currentPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;delta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;rangeWithDots&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt; 
+        &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'&amp;lt;li&amp;gt;&amp;lt;a id=&quot;previous&quot; href=&quot;#'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;backward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s1&quot;&gt;'&quot; class=&quot;btn btn-default&quot; onclick=&quot;getPage('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;backward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s1&quot;&gt;'); initPageNumbers('&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;backward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s1&quot;&gt;')&quot;&amp;gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s2&quot;&gt;&quot;Previous&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+          
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; 
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                        &lt;span class=&quot;s1&quot;&gt;'&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot; class=&quot;btn btn-default&quot;&amp;gt;'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+                        &lt;span class=&quot;s2&quot;&gt;&quot;...&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                        &lt;span class=&quot;nx&quot;&gt;rangeWithDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'...'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&amp;lt;li&amp;gt;&amp;lt;a href=&quot;#'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+                &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot; class=&quot;btn btn-default&quot; onclick=&quot;getPage('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+                &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'); initPageNumbers('&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')&quot;&amp;gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+                &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;rangeWithDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;rangeWithDots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; 
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+            &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;  &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'&amp;lt;li&amp;gt;&amp;lt;a id=&quot;next&quot; href=&quot;#'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foreward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'&quot; class=&quot;btn btn-default&quot; onclick=&quot;getPage('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'); initPageNumbers('&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+             &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foreward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')&quot;&amp;gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s2&quot;&gt;&quot;Next&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+            &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'#pageNums'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'&amp;lt;li&amp;gt;&amp;lt;a id=&quot;next&quot; href=&quot;#'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foreward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;'&quot; class=&quot;btn btn-default&quot; onclick=&quot;getPage('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foreward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'); initPageNumbers('&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;getPaging&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;foreward&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')&quot;&amp;gt;'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+            &lt;span class=&quot;s2&quot;&gt;&quot;Next&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+            
+            &lt;span class=&quot;nx&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;currentPage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This would be the 2nd main chunk of my code, the paging.  It’s kind of chunky, but it gets the job done. The way I went about creating this was finding an algorithm &lt;a href=&quot;https://gist.github.com/kottenator&quot;&gt;someone&lt;/a&gt; had already created for the paging, figuring out how it worked, and then using that as a &lt;em&gt;“framework”&lt;/em&gt; for my function.  From there I was able to create another function to wipe and rebuild the next results page and recursively call initPageNumbers() to rebuild the paging.&lt;/p&gt;
+
+&lt;p&gt;So… Obviously you’d be better off using a framework like &lt;a href=&quot;https://velocity.apache.org/&quot;&gt;Velocity&lt;/a&gt; or &lt;a href=&quot;http://flask.pocoo.org/&quot;&gt;Flask&lt;/a&gt; along with a &lt;a href=&quot;https://wiki.apache.org/solr/IntegratingSolr&quot;&gt;language specific Solr library&lt;/a&gt;, but for this specific application the approach worked great.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The rest of the code is specific to the application so it won’t be necessary to present it, but most of it’s purpose was to preserve the search input and specify which core to query using &lt;a href=&quot;https://www.w3schools.com/js/js_cookies.asp&quot;&gt;cookies&lt;/a&gt;(see getQuery(), var core), activate event listeners, and add some flair(think Google) to the page.&lt;/p&gt;
+
+&lt;p&gt;-Paul&lt;/p&gt;
+</description>
+        <pubDate>Tue, 11 Jun 2019 06:00:00 -0700</pubDate>
+        <link>http://localhost:4000/personal/tutorial/2019/06/11/current-projects.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/06/11/current-projects.html</guid>
+        
+        <category>apache</category>
+        
+        <category>solr</category>
+        
+        <category>js</category>
+        
+        <category>css</category>
+        
+        
+        <category>personal</category>
+        
+        <category>tutorial</category>
+        
+      </item>
     
       <item>
         <title>static content says #1</title>
@@ -22,80 +159,144 @@
 &lt;p&gt;&lt;em&gt;(Note: you can ignore the p styling, just there for consistency’s sake.)&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;HTML&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  8 &amp;lt;body&amp;gt;
-  9 &amp;lt;p&amp;gt;Paul/Maxey&amp;lt;/p&amp;gt;
- 10 &amp;lt;img src=&quot;..\Pictures\ep1.jpg&quot;&amp;gt;
- 11 &amp;lt;img src=&quot;..\Pictures\ep2.jpg&quot;&amp;gt;
- 12 &amp;lt;img src=&quot;..\Pictures\ep3.jpg&quot;&amp;gt;
- 13 &amp;lt;img src=&quot;..\Pictures\ep4.jpg&quot;&amp;gt;
- 14 &amp;lt;img src=&quot;..\Pictures\ep5.jpg&quot;&amp;gt;
- 15 &amp;lt;img src=&quot;..\Pictures\ep6.jpg&quot;&amp;gt;
- 16 &amp;lt;img src=&quot;..\Pictures\ep7.jpg&quot;&amp;gt;
- 17 &amp;lt;img src=&quot;..\Pictures\ep8.jpg&quot;&amp;gt;
- 18 &amp;lt;img src=&quot;..\Pictures\ep9.jpg&quot;&amp;gt;
- 19 &amp;lt;/body&amp;gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  8 &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  9 &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Paul/Maxey&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+ 10 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep1.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 11 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep2.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 12 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep3.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 13 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep4.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 14 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep5.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 15 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep6.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 16 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep7.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 17 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep8.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 18 &lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;..\Pictures\ep9.jpg&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+ 19 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;CSS&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  1 img {
-  2     width: 30%;
-  3     float: left;
-  4     margin: 1.66%;
-  5 }
-  6 p {
-  7     font-family: raleway;
-  8     margin-left: 1.66%;
-  9     font-size: 23px;
- 10     font-weight: 800;
- 11     text-transform: uppercase;
- 12     border-bottom: 2px solid #f1f1f1;
- 13     padding-bottom: 20px;
- 14     width: 30%
- 15 
- 16 }
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nt&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;2&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;3&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;4&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.66%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;7&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;font-family&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;raleway&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;8&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;margin-left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1.66%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;9&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;23px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;11&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;text-transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;uppercase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;border-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#f1f1f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;13&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;padding-bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;14&lt;/span&gt;     &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30%&lt;/span&gt;
+ &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt; 
+ &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;hr /&gt;
 
-&lt;p&gt;First I set “variables” for each image.  The square brackets contain the variable name and are followed by image path and alt-text.&lt;/p&gt;
+&lt;p&gt;First I set reference links for each image.  The square brackets contain the reference link name and are followed by image path and alt-text.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
-[image2]: /assets/ep2.jpg &quot;Copyright Paul Maxey 2019&quot;
+&lt;div class=&quot;language-md highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;image1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;/assets/ep1.jpg&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;&quot;Copyright Paul Maxey 2019&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;image2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;/assets/ep2.jpg&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;&quot;Copyright Paul Maxey 2019&quot;&lt;/span&gt;
 ...
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Then I set a style block that I will use with each image..&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{:imageGrid:width=&quot;30%&quot;}
+&lt;div class=&quot;language-md highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{:imageGrid:width=&quot;30%&quot;}
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;and apply it to each variable.&lt;/p&gt;
+&lt;p&gt;and apply it to each reference link.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[image1]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
+&lt;div class=&quot;language-md highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;image1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;/assets/ep1.jpg&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;&quot;Copyright Paul Maxey 2019&quot;&lt;/span&gt;
 {: imageGrid}
-[image2]: /assets/ep1.jpg &quot;Copyright Paul Maxey 2019&quot;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;image2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;/assets/ep1.jpg&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;&quot;Copyright Paul Maxey 2019&quot;&lt;/span&gt;
 {: imageGrid}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Finally I laid out each image in a grid like fashion.&lt;/p&gt;
+&lt;p&gt;and then finally, I referenced the images.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;![image1] ![image4] ![image7]
-![image2] ![image5] ![image8]
-![image3] ![image6] ![image9]
+&lt;div class=&quot;language-md highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;![&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;image9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;hr /&gt;
 
 &lt;p&gt;I gotta say, it’s pretty close.&lt;/p&gt;
 
-&lt;p&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep1.jpg&quot; alt=&quot;image1&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep4.jpg&quot; alt=&quot;image4&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep7.jpg&quot; alt=&quot;image7&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;
-&lt;img width=&quot;30%&quot; src=&quot;/assets/ep2.jpg&quot; alt=&quot;image2&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep5.jpg&quot; alt=&quot;image5&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep8.jpg&quot; alt=&quot;image8&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;
-&lt;img width=&quot;30%&quot; src=&quot;/assets/ep3.jpg&quot; alt=&quot;image3&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep6.jpg&quot; alt=&quot;image6&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt; &lt;img width=&quot;30%&quot; src=&quot;/assets/ep9.jpg&quot; alt=&quot;image9&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;#img1&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep1.jpg&quot; alt=&quot;image1&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img2&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep2.jpg&quot; alt=&quot;image2&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img3&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep3.jpg&quot; alt=&quot;image3&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img4&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep4.jpg&quot; alt=&quot;image4&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img5&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep5.jpg&quot; alt=&quot;image5&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img6&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep6.jpg&quot; alt=&quot;image6&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img7&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep7.jpg&quot; alt=&quot;image7&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img8&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep8.jpg&quot; alt=&quot;image8&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span&gt;&lt;a href=&quot;#img9&quot; rel=&quot;modal:open&quot;&gt;&lt;img width=&quot;30%&quot; src=&quot;/assets/ep9.jpg&quot; alt=&quot;image9&quot; title=&quot;Copyright Paul Maxey 2019&quot; /&gt;&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;It’s nothing exciting, but it’s a fun way to incorporate images in your Jekyll post.&lt;/p&gt;
+
+&lt;div id=&quot;img1&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep1.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img2&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep2.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img3&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep3.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img4&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep4.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img5&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep5.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img6&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep6.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img7&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep7.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img8&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep8.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+&lt;div id=&quot;img9&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
+  &lt;img src=&quot;/assets/ep9.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;br /&gt;
+  &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.min.js&quot; integrity=&quot;sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css&quot; /&gt;
+
 </description>
-        <pubDate>Tue, 19 Feb 2019 16:18:00 -0700</pubDate>
-        <link>http://0.0.0.0:4000/personal/tutorial/2019/02/19/something-fun.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/personal/tutorial/2019/02/19/something-fun.html</guid>
+        <pubDate>Tue, 19 Feb 2019 15:18:00 -0800</pubDate>
+        <link>http://localhost:4000/personal/tutorial/2019/02/19/something-fun.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/02/19/something-fun.html</guid>
         
         <category>markdown</category>
         
@@ -141,9 +342,9 @@
 
 &lt;p&gt;-Paul&lt;/p&gt;
 </description>
-        <pubDate>Sat, 26 Jan 2019 15:35:00 -0700</pubDate>
-        <link>http://0.0.0.0:4000/personal/tutorial/2019/01/26/hello-world.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/personal/tutorial/2019/01/26/hello-world.html</guid>
+        <pubDate>Sat, 26 Jan 2019 14:35:00 -0800</pubDate>
+        <link>http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</guid>
         
         <category>jekyll</category>
         
