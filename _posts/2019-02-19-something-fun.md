@@ -99,7 +99,7 @@ I gotta say, it's pretty close.
 
 {:imageGrid:width="30%"}
 
-[image1](https://pmaxey.com/assets/ep1.jpg): /assets/ep1.jpg "Copyright Paul Maxey 2019"
+[image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
 [image2]: /assets/ep2.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
