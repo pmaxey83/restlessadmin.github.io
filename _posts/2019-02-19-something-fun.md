@@ -93,12 +93,12 @@ Finally I laid out each image in a grid like fashion.
 
 I gotta say, it's pretty close.
 
-![image1](https://pmaxey.com/assets/ep1.jpg) ![image2](https://pmaxey.com/assets/ep2.jpg) ![image3](https://pmaxey.com/assets/ep3.jpg)
-![image4](https://pmaxey.com/assets/ep4.jpg) ![image5](https://pmaxey.com/assets/ep5.jpg) ![image6](https://pmaxey.com/assets/ep6.jpg)
-![image7](https://pmaxey.com/assets/ep7.jpg) ![image8](https://pmaxey.com/assets/ep8.jpg) ![image9](https://pmaxey.com/assets/ep9.jpg)
+![image1] ![image4] ![image7]
+![image2] ![image5] ![image8]
+![image3] ![image6] ![image9]
 
 {:imageGrid:width="30%"}
-<div >
+
 [image1]: /assets/ep1.jpg "Copyright Paul Maxey 2019"
 {: imageGrid}
 [image2]: /assets/ep2.jpg "Copyright Paul Maxey 2019"
