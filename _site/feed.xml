@@ -5,8 +5,8 @@
     <description>Former Sys-Admin who drank too much of the Vim kool-aid.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 13 Jun 2019 11:36:39 -0700</pubDate>
-    <lastBuildDate>Thu, 13 Jun 2019 11:36:39 -0700</lastBuildDate>
+    <pubDate>Mon, 17 Jun 2019 16:30:46 -0700</pubDate>
+    <lastBuildDate>Mon, 17 Jun 2019 16:30:46 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -242,47 +242,47 @@ But the real question is now..  how do I go further?  Well, let us start by talk
 
 &lt;p&gt;It’s nothing exciting, but it’s a fun way to incorporate images in your Jekyll post.&lt;/p&gt;
 
-&lt;div id=&quot;img1&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep1.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+&lt;div id=&quot;img1&quot; class=&quot;modal&quot;&gt;
+  &lt;img src=&quot;/assets/ep1.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img2&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep2.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep2.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img3&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep3.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep3.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img4&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep4.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep4.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img5&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep5.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep5.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img6&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep6.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep6.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img7&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep7.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep7.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img8&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep8.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep8.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;
 &lt;div id=&quot;img9&quot; class=&quot;modal&quot; style=&quot;text-align: center;&quot;&gt;
-  &lt;img src=&quot;/assets/ep9.jpg&quot; style=&quot;width:90%; height:auto; padding-left:.5em&quot; /&gt;
+  &lt;img src=&quot;/assets/ep9.jpg&quot; class=&quot;modal_img&quot; /&gt;
   &lt;br /&gt;
   &lt;a href=&quot;#&quot; rel=&quot;modal:close&quot;&gt;Close&lt;/a&gt;
 &lt;/div&gt;

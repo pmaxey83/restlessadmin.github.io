@@ -133,47 +133,47 @@ I gotta say, it's pretty close.
 
 It's nothing exciting, but it's a fun way to incorporate images in your Jekyll post.
 
-<div id="img1" class="modal" style="text-align: center;">
-  <img src="/assets/ep1.jpg" style="width:90%; height:auto; padding-left:.5em">
+<div id="img1" class="modal">
+  <img src="/assets/ep1.jpg"  class="modal_img">
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img2" class="modal" style="text-align: center;">
-  <img src="/assets/ep2.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep2.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img3" class="modal" style="text-align: center;">
-  <img src="/assets/ep3.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep3.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img4" class="modal" style="text-align: center;">
-  <img src="/assets/ep4.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep4.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img5" class="modal" style="text-align: center;">
-  <img src="/assets/ep5.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep5.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img6" class="modal" style="text-align: center;">
-  <img src="/assets/ep6.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep6.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img7" class="modal" style="text-align: center;">
-  <img src="/assets/ep7.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep7.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img8" class="modal" style="text-align: center;">
-  <img src="/assets/ep8.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep8.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
 <div id="img9" class="modal" style="text-align: center;">
-  <img src="/assets/ep9.jpg" style="width:90%; height:auto; padding-left:.5em">
+  <img src="/assets/ep9.jpg" class="modal_img">
   <br>
   <a href="#" rel="modal:close">Close</a>
 </div>
