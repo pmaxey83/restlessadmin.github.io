@@ -1909,3 +1909,5 @@ div.modal { position: relative; text-align: center; }
 .date a, .time a, .author a, .tags a { color: #26619c; }
 
 .date a:hover, .time a:hover, .author a:hover, .tags a:hover { color: #000000; }
+
+@media (max-width: 960px) { .navigation-wrapper { background: rgba(0, 46, 99, 0.98); background-image: initial; background-position-x: initial; background-position-y: initial; background-size: initial; background-repeat-x: initial; background-repeat-y: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgba(0, 46, 99, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.09); } }
