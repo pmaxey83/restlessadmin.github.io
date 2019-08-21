@@ -3,10 +3,10 @@
   <channel>
     <title>accomplishing now</title>
     <description>Former Sys-Admin who drank too much of the Vim kool-aid.</description>
-    <link>http://0.0.0.0:4000/</link>
-    <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 19 Jun 2019 11:53:35 -0700</pubDate>
-    <lastBuildDate>Wed, 19 Jun 2019 11:53:35 -0700</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 21 Aug 2019 06:37:15 -0700</pubDate>
+    <lastBuildDate>Wed, 21 Aug 2019 06:37:15 -0700</lastBuildDate>
     <generator>Jekyll v3.7.4</generator>
     
       <item>
@@ -128,8 +128,8 @@ But the real question is now..  how do I go further?  Well, let us start by talk
 &lt;p&gt;-Paul&lt;/p&gt;
 </description>
         <pubDate>Tue, 11 Jun 2019 06:00:00 -0700</pubDate>
-        <link>http://0.0.0.0:4000/personal/tutorial/2019/06/11/current-projects.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/personal/tutorial/2019/06/11/current-projects.html</guid>
+        <link>http://localhost:4000/personal/tutorial/2019/06/11/current-projects.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/06/11/current-projects.html</guid>
         
         <category>apache</category>
         
@@ -295,8 +295,8 @@ But the real question is now..  how do I go further?  Well, let us start by talk
 
 </description>
         <pubDate>Tue, 19 Feb 2019 15:18:00 -0800</pubDate>
-        <link>http://0.0.0.0:4000/personal/tutorial/2019/02/19/something-fun.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/personal/tutorial/2019/02/19/something-fun.html</guid>
+        <link>http://localhost:4000/personal/tutorial/2019/02/19/something-fun.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/02/19/something-fun.html</guid>
         
         <category>markdown</category>
         
@@ -343,8 +343,8 @@ But the real question is now..  how do I go further?  Well, let us start by talk
 &lt;p&gt;-Paul&lt;/p&gt;
 </description>
         <pubDate>Sat, 26 Jan 2019 14:35:00 -0800</pubDate>
-        <link>http://0.0.0.0:4000/personal/tutorial/2019/01/26/hello-world.html</link>
-        <guid isPermaLink="true">http://0.0.0.0:4000/personal/tutorial/2019/01/26/hello-world.html</guid>
+        <link>http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</link>
+        <guid isPermaLink="true">http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</guid>
         
         <category>jekyll</category>
         
