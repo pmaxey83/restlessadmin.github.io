@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>http://localhost:4000/personal/tutorial/2020/01/28/solr-redo.html</loc>
+      
+        <lastmod>2020-01-28T13:00:00-07:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://localhost:4000/personal/tutorial/2019/06/11/current-projects.html</loc>
       
         <lastmod>2019-06-11T06:00:00-07:00</lastmod>
@@ -20,7 +35,7 @@
     <url>
       <loc>http://localhost:4000/personal/tutorial/2019/02/19/something-fun.html</loc>
       
-        <lastmod>2019-02-19T15:18:00-08:00</lastmod>
+        <lastmod>2019-02-19T16:18:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -35,7 +50,7 @@
     <url>
       <loc>http://localhost:4000/personal/tutorial/2019/01/26/hello-world.html</loc>
       
-        <lastmod>2019-01-26T14:35:00-08:00</lastmod>
+        <lastmod>2019-01-26T15:35:00-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -51,7 +66,7 @@
     <url>
       <loc>http://localhost:4000/404.html</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -66,7 +81,7 @@
     <url>
       <loc>http://localhost:4000/about/</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -83,7 +98,7 @@
     <url>
       <loc>http://localhost:4000/feed.xml</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -98,7 +113,7 @@
     <url>
       <loc>http://localhost:4000/humans.txt</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -113,7 +128,7 @@
     <url>
       <loc>http://localhost:4000/</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -130,7 +145,7 @@
     <url>
       <loc>http://localhost:4000/css/main.css</loc>
       
-        <lastmod>2019-08-21T06:37:15-07:00</lastmod>
+        <lastmod>2020-01-28T13:16:29-07:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
